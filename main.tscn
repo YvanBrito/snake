@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgps7xkn4pmri"]
+
+[ext_resource type="Script" uid="uid://c8u2iqou6jcfd" path="res://snake.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dgqq6dq6uc1t" path="res://manager.gd" id="1_h2yge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_h2yge")
+
+[node name="Snake" type="Node2D" parent="."]
+script = ExtResource("1_0xm2m")
+
+[node name="Area2D" type="Area2D" parent="Snake"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snake/Area2D"]
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="WalkSnakeTime" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, -3)
+
+[connection signal="area_entered" from="Snake/Area2D" to="Snake" method="_on_area_2d_area_entered"]
