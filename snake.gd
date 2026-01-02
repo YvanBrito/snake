@@ -9,6 +9,7 @@ const HEAD = preload("uid://yba2sslesdq2")
 
 var pieces: Array[Node2D]
 var direction: Vector2 = Vector2.RIGHT
+var previous_pos: Vector2
 var last_position: Vector2
 var local_when_input: Vector2 = Vector2.ZERO
 var intervalo_ms: int = 100
@@ -29,7 +30,7 @@ func start_new_game() -> void:
 	manager.food_eaten()
 
 func _on_timeout() -> void:
-	last_position = pieces[0].position
+	previous_pos = pieces[0].position
 	pieces[0].position += direction * manager.piece_size
 	if pieces[0].position.x > manager.right_limit:
 		pieces[0].position.x = manager.left_limit
@@ -50,11 +51,12 @@ func _on_timeout() -> void:
 		pieces[0].rotation_degrees = 270
 	for i in range(1, pieces.size()):
 		var aux = pieces[i].position
-		pieces[i].position = last_position
-		last_position = aux
+		pieces[i].position = previous_pos
+		previous_pos = aux
 		if pieces[0].position == pieces[i].position:
 			start_new_game()
 			break
+	last_position = previous_pos
 	
 func _input(event: InputEvent) -> void:
 	if event.is_pressed() and not event.is_echo():
@@ -79,7 +81,7 @@ func _input(event: InputEvent) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.name == "Food":
 		var piece = PIECE.instantiate()
-		piece.position = Vector2(pieces[-1].position.x - 20, pieces[-1].position.y)
+		piece.position = last_position
 		pieces.push_back(piece)
 		add_child(piece)
 		manager.food_eaten()
