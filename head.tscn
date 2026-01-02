@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://yba2sslesdq2"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_7dm0k"]
+size = Vector2(20, 20)
+
+[sub_resource type="QuadMesh" id="QuadMesh_mihp7"]
+size = Vector2(5, 2)
+
+[node name="Head" type="Node2D"]
+rotation = 0.0017453292
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("QuadMesh_7dm0k")
+
+[node name="Eyes" type="Node2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Eyes"]
+modulate = Color(0, 0, 0, 1)
+z_index = 1
+position = Vector2(-5, -4)
+mesh = SubResource("QuadMesh_mihp7")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Eyes"]
+modulate = Color(0, 0, 0, 1)
+z_index = 1
+position = Vector2(-5, 4)
+mesh = SubResource("QuadMesh_mihp7")

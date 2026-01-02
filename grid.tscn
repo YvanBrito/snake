@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://3f1tokgmmxxq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_2y4pi"]
+size = Vector2(18, 18)
+
+[node name="Grid" type="Node2D"]
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+modulate = Color(1, 1, 1, 0.11372549)
+mesh = SubResource("QuadMesh_2y4pi")
